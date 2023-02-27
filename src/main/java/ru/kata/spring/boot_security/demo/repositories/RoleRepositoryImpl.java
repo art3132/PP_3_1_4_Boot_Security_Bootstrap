@@ -4,18 +4,16 @@ import org.springframework.stereotype.Repository;
 import ru.kata.spring.boot_security.demo.entities.Role;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 
 @Repository
 public class RoleRepositoryImpl implements RoleRepository {
 
+    @PersistenceContext
+    private EntityManager entityManager;
 
-    private final EntityManager entityManager;
-
-    public RoleRepositoryImpl(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
 
     @Override
     public Role getRole(String name) {
@@ -35,5 +33,10 @@ public class RoleRepositoryImpl implements RoleRepository {
     public List<Role> listAllRoles() {
         return entityManager.createQuery("from Role", Role.class)
                 .getResultList();
+    }
+
+    @Override
+    public void addRole(Role role) {
+        entityManager.persist(role);
     }
 }

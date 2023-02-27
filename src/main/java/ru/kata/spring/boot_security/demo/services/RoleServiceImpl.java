@@ -1,11 +1,12 @@
 package ru.kata.spring.boot_security.demo.services;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.entities.Role;
 import ru.kata.spring.boot_security.demo.repositories.RoleRepository;
 
 import java.util.List;
-import java.util.Set;
+
 @Service
 public class RoleServiceImpl implements RoleService {
 
@@ -26,4 +27,9 @@ public class RoleServiceImpl implements RoleService {
         return roleRepository.getRole(name);
     }
 
+    @Override
+    @Transactional
+    public void addRole(Role role) {
+        roleRepository.addRole(role);
+    }
 }

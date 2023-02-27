@@ -13,4 +13,6 @@ public interface RoleRepository {
 
     List<Role> listAllRoles();
 
+    void addRole(Role role);
+
 }
